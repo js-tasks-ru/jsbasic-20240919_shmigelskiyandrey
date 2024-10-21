@@ -42,7 +42,6 @@ export default class StepSlider {
       this.slider.classList.add('slider_dragging');
       let sliderWidth = this.slider.offsetWidth;
       
-//
       let shiftX = this.slider.getBoundingClientRect().left;
       let rightShiftX = this.slider.getBoundingClientRect().right;
 
