@@ -113,6 +113,7 @@ export default class Cart {
     this.modal.open()
 
     this.modalWindow = document.querySelector('.modal')
+    let cartForm = document.querySelector('.cart-form')
 
     this.modalWindow.addEventListener('click', e => {
       let target = e.target.closest('.cart-counter__button');
@@ -129,12 +130,9 @@ export default class Cart {
       };
     });
 
-    this.modalWindow.addEventListener('click', e => {
-      let target = e.target.closest('.cart-buttons__button');
-
-      if (!target) { return }
-
-      this.onSubmit(e);
+    cartForm.addEventListener('submit', e => {
+      e.preventDefault();
+      this.onSubmit(e); 
     })
   }
 
