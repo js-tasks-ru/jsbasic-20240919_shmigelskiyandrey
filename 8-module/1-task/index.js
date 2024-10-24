@@ -20,7 +20,8 @@ export default class CartIcon {
           <span class="cart-icon__count">${cart.getTotalCount()}</span>
           <span class="cart-icon__price">€${cart.getTotalPrice().toFixed(2)}</span>
         </div>`;
-
+      
+      this.elementTop = this.elem.getBoundingClientRect().top
       this.updatePosition();
 
       this.elem.classList.add('shake');
@@ -39,6 +40,14 @@ export default class CartIcon {
   }
 
   updatePosition() {
-    // ваш код ...
-  }
+    let rightEdgeOfContainer = document.querySelector('.container').getBoundingClientRect().right
+
+    if (!(window.scrollY > this.elementTop) || document.documentElement.clientWidth <= 767) {
+      this.elem.style = 'position: absolute'
+    } else if (document.documentElement.clientWidth - (rightEdgeOfContainer + 20) - this.elem.offsetWidth < 10) {
+      this.elem.style = `position: fixed; top: 50px; z-index: 1000; left: ${document.documentElement.clientWidth - this.elem.offsetWidth - 10 + 'px'}`
+    } else {
+      this.elem.style = `position: fixed; top: 50px; z-index: 1000; left: ${rightEdgeOfContainer + 20 + 'px'}`
+    }
+   }
 }
