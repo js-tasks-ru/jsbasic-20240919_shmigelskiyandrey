@@ -20,8 +20,25 @@ export default class StepSlider {
       this.sliderSteps.append(document.createElement('span'));
     };
     this.sliderSteps.querySelector('span').classList.add('slider__step-active');
+
+    this.setInitialValue(this.value);
     this.clickListener();
     this.DND();
+  }
+
+  setInitialValue(value) {
+    let sliderValue = this.slider.querySelector('.slider__value');
+    let sliderThumb = this.slider.querySelector('.slider__thumb');
+    let sliderProgress = this.slider.querySelector('.slider__progress');
+    let points = [...this.sliderSteps.querySelectorAll('span')];
+
+    points.forEach(el => el.classList.remove('slider__step-active'));
+    points[value].classList.add('slider__step-active');
+
+    let currentPercent = (value / (this.steps - 1)) * 100 + '%';
+    sliderThumb.style.left = currentPercent;
+    sliderProgress.style.width = currentPercent;
+    sliderValue.innerHTML = value;
   }
 
   clickListener() {
